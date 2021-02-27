@@ -26,7 +26,10 @@
                 item.Item.author,
                 item.Item.publisherName,
                 item.Item.seriesName,
-                item.Item.titleKana
+                item.Item.title,
+                item.Item.titleKana,
+                item.Item.largeImageUrl,
+                item.Item.itemUrl
               )
             "
             >お気に入り</v-btn
@@ -63,12 +66,15 @@ export default {
           this.getFlag = true;
         });
     },
-    addBooks(author, publisher, series, title) {
+    addBooks(author, publisher, series, title, titleKana, thumb, url) {
       const addData = {
         author: author,
         publisher: publisher,
         series: series,
         title: title,
+        titleKana: titleKana,
+        thumb: thumb,
+        url: url,
       };
 
       this.db
