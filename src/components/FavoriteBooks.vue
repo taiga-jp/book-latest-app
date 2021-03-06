@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <p>お気に入り書籍</p>
+    <h2>お気に入り書籍</h2>
     <v-row no-gutters>
       <v-col
         v-for="(item, i) in favoriteInfo"
@@ -14,7 +14,7 @@
         <v-btn
           depressed
           color="primary"
-          class="mt-auto"
+          class="mt-auto mb-1"
           @click="
             getLatestBook(
               item.author,
@@ -24,6 +24,13 @@
             )
           "
           >最新刊表示</v-btn
+        >
+        <v-btn
+          depressed
+          color="error"
+          class="mt-auto"
+          @click="deleteFavoriteBooks(item.docId)"
+          >削除</v-btn
         >
       </v-col>
     </v-row>
@@ -78,6 +85,7 @@ export default {
     };
   },
   created: function () {
+    this.favoriteInfo = [];
     //firestore
     this.db.onSnapshot((snapshot) => {
       snapshot.forEach((doc) => {
@@ -89,6 +97,7 @@ export default {
           titleKana: "",
           thumb: "",
           url: "",
+          docId: "",
         };
         favorite.author = doc.data().author;
         favorite.publisher = doc.data().publisher;
@@ -97,6 +106,7 @@ export default {
         favorite.titleKana = doc.data().titleKana;
         favorite.thumb = doc.data().thumb;
         favorite.url = doc.data().url;
+        favorite.docId = doc.id;
         this.favoriteInfo.push(favorite);
       });
     });
@@ -138,6 +148,10 @@ export default {
         });
       this.latestFlag = true;
     },
+    deleteFavoriteBooks(docId) {
+      this.favoriteInfo = [];
+      this.db.doc(docId).delete();
+    },
   },
 };
 </script>
@@ -145,9 +159,11 @@ export default {
 <style>
 .latest-book {
   position: fixed;
-  top: 320px;
+  top: 260px;
   right: 16px;
   min-width: 192px;
+  max-width: 218px;
+  background-color: #fff;
 }
 
 .latest-book-item {

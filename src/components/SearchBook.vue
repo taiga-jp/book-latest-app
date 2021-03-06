@@ -6,7 +6,8 @@
         <v-btn elevation="2" @click="getSearchBooks">検索</v-btn>
       </div>
     </div>
-    <div v-if="getFlag">
+    <div v-if="getFlag" class="mb-16">
+      <h2>検索結果</h2>
       <v-row no-gutters>
         <v-col
           v-for="item in info.data.Items"
@@ -91,6 +92,4 @@ export default {
 </script>
 
 <style>
-.search-item {
-}
 </style>

@@ -26,3 +26,17 @@ export default {
   }),
 };
 </script>
+
+<style>
+@media screen and (min-width: 1904px) {
+  .container {
+    max-width: 1185px;
+  }
+}
+
+h2 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+</style>
